@@ -8,6 +8,8 @@
 
 #include "../global.h"
 
+
+//inilizing our inital data we need to render
 static bool init = false;
 
 static Buffer* vb = (Buffer*)malloc(sizeof(Buffer));
@@ -26,6 +28,8 @@ static unsigned int indices[] = {
      0,1,2,
      1,2,3
 };
+
+//=============================================
 
 void square_init()
 {

@@ -29,6 +29,7 @@ void pathfinding_init(A_Star* alg, int start_x, int start_y, int goal_x, int goa
 	alg->goal = Node{goal_x,goal_y};
 	alg->goal.is_goal = true;
 	alg->closed.push_back(alg->goal);
+
 	//ERROR [Watch out for giving it a nullptr]
 	alg->map = *global_get()->map;
 
@@ -115,6 +116,7 @@ void pathfinding_step(A_Star* alg, Node curr)
 
 	node_print(curr);
 
+	//checking grid for path
 	pathfinding_check_dir(alg, curr, 1, 0);//right
 	pathfinding_check_dir(alg, curr, -1, 0);//left
 	pathfinding_check_dir(alg, curr, 0, -1);//up
@@ -125,6 +127,7 @@ void pathfinding_step(A_Star* alg, Node curr)
 		return;
 	}
 
+	//finding lowest f value
 	float lowest_f = 1000000.f;
 	int lowest_f_i = -1;
 	for (int i=0; i<alg->open.size();++i)
@@ -132,6 +135,7 @@ void pathfinding_step(A_Star* alg, Node curr)
 		Node n = alg->open[i];
 		if (n.f < lowest_f) { lowest_f = n.f; lowest_f_i = i; };
 	}
+	//=======================|
 
 	//error checking
 	if (lowest_f_i == -1)
@@ -140,6 +144,7 @@ void pathfinding_step(A_Star* alg, Node curr)
 		return;
 	}
 
+	//creating the new node to search for next step==|
 	Node new_n = alg->open[lowest_f_i];
 	new_n.is_collasped = true;
 
@@ -158,8 +163,10 @@ std::vector<Vec2f> pathfinding_traceback(A_Star alg)
 	if (!alg.path_found) { LOG("PATH NOT FOUND RETURNING"); return {};}
 
 	std::vector<Vec2f> path;
+	
 	path.push_back(Vec2f{(float)alg.goal.x,(float)alg.goal.y});
 	Node n = get_node(alg.goal.parent_x, alg.goal.parent_y, alg.open, alg.closed);
+
 	while (!n.is_start)
 	{
 		path.push_back(Vec2f{ (float)n.x,(float)n.y });

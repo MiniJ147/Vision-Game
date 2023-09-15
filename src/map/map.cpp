@@ -74,6 +74,7 @@ void map_load(Map* m, float* player_x, float* player_y, float* monster_x, float*
 	m->map_loaded = true;
 }
 
+//loads all map textures we will need for rendering
 void map_load_texture(Map* m, const char* load_path)
 {
 	if (m->textures_loaded) { LOG("Error tried loading textures twice returning...\n"); return; }
@@ -126,6 +127,7 @@ void map_change_texture(Map* m, int texture_index, int x, int y, bool adjusted)
 	m->texture_ids[i] = texture_index;
 }
 
+//adjusted is so we dont have to have snapped to the grid cords
 Block map_get_block(Map m, int x, int y, bool adjusted)
 {
 	if (!adjusted)

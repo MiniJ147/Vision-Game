@@ -70,12 +70,16 @@ int main()
 
     Map map;
 
+    //loading maps
     map_load(&map, &p_spawn_x, &p_spawn_y, &m_spawn_x, &m_spawn_y, "assets/maps/stage.map");
     map_load_texture(&map, "assets/maps/load_order.map");
     global_get()->map = &map;
+    //=============
 
+    //creating our player and monster
     player_create(&player, p_spawn_x, p_spawn_y, "assets/textures/player.jpg");
     monster_create(&monster, &player.pos,m_spawn_x, m_spawn_y, "assets/textures/monster.jpg");
+    //==============
 
     float delta_time = 0.0f;
     float last_frame = 0.0f; 
@@ -93,12 +97,18 @@ int main()
         glClearColor(0.7, 0.7, 0.7, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
 
+
+        //ticks
         player_tick(&player.pos, map, player.move_speed,delta_time);
         monster_tick(&monster,delta_time);
+        //=======
 
+
+        //rendering========
         map_render(map, cam_pos); //map render
         square_render({}, {}, PLAYER_SIZE, player.texture, false); //player render
         square_render(monster.pos, cam_pos, MONSTER_SIZE, monster.texture, true); //monster render
+        //=================
 
         glfwSwapBuffers(window);
         glfwPollEvents();

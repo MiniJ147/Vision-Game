@@ -27,6 +27,7 @@ void monster_create(Monster* m, Vec2f* player_pos, float x, float y, const char*
 
 int move_to_pos(Vec2f* pos, Vec2f goal, const float dt)
 {
+    //buffer prevent monster from going out of bounds
     //todo add buffer
     //move x
     int buffer_x = 6;
@@ -45,6 +46,7 @@ int move_to_pos(Vec2f* pos, Vec2f goal, const float dt)
 //complex logic gets stored in here
 void monster_roaming(int timer, Vec2f* pos, Block* goal, std::vector<Vec2f>& path, const float dt)
 {
+    //initial check when we need to reach another cell
     if (timer==0 || run_alg)
     {
         path.clear();
@@ -55,8 +57,9 @@ void monster_roaming(int timer, Vec2f* pos, Block* goal, std::vector<Vec2f>& pat
         int r_block_x = rand() % global_get()->map->dimension[0];
         int r_block_y = rand() % global_get()->map->dimension[1];
 
+        //finding new block to roam to
         Block b = map_get_block(*global_get()->map, r_block_x, r_block_y, true);
-        if ((b.flags & 0b1) == 0b1)
+        if ((b.flags & 0b1) == 0b1) //if collidable invalid block
         {
             LOG("FOUND VAILED BLOCK");
             *goal = b;
