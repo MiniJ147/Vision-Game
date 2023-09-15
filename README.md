@@ -20,8 +20,8 @@
   and after I woke up I relized it would make an amazing game.<br><br>
 
   <h4 id="socials">Socials</h4>
-   <a href="https://www.youtube.com/@Mini_CS">YouTube</a> --> Where I live stream all of development<br>
-   <a href="https://trello.com/b/8FdX8EIt/horror-game">Roadmap</a> --> General Idea of Process & future
+   <a target="_blank" href="https://www.youtube.com/@Mini_CS">YouTube</a> --> Where I live stream all of development<br>
+   <a target="_blank" href="https://trello.com/b/8FdX8EIt/horror-game">Roadmap</a> --> General Idea of Process & future
   
   <h4 algin="left" id="tech_info">Tech Info</h4>
   <ul>
